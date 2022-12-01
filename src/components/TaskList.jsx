@@ -11,8 +11,6 @@ export function TaskList() {
 
   const [newTaskText, setNewTaskText] = useState("");
 
-  const [markCount, setMarkedTasks] = useState(0);
-
   const taskQuantity = tasks.length;
 
   function handleCreateNewTask() {
@@ -32,16 +30,8 @@ export function TaskList() {
   }
 
   function deleteTask(taskToDelete) {
-    const tasksWithoutDeletedOne = tasks.filter((task) => {
-      return task != taskToDelete;
-    });
-
-    setTasks(tasksWithoutDeletedOne);
-  }
-
-  function markTask(taskToDelete) {
-    const tasksWithoutDeletedOne = tasks.filter((task) => {
-      return task != taskToDelete;
+    const tasksWithoutDeletedOne = tasks.filter((id) => {
+      return id != taskToDelete;
     });
 
     setTasks(tasksWithoutDeletedOne);
@@ -77,7 +67,7 @@ export function TaskList() {
 
             <div>
               <strong className={styles.checkListTitle2}>Concluidas</strong>
-              <span><span>{markCount}</span></span>
+              <span>{}</span>
             </div>
           </header>
 
@@ -88,9 +78,9 @@ export function TaskList() {
               return (
                 <Task
                   key={task}
+                  id={task}
                   content={task}
                   onDeleteTask={deleteTask}
-                  onMarkTask={markTask}
                 />
               );
             })}

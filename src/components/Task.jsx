@@ -1,15 +1,17 @@
 import { Trash, CheckCircle } from "phosphor-react";
 import { useState } from "react";
+import { Checkbox } from "./CheckBox";
 import styles from "./Task.module.css";
 
-export function Task({ content, onDeleteTask, onMarkTask }) {
+export function Task({ id, content, onDeleteTask }) {
+  const [checked, setchecked] = useState(false);
+
+  const handleChangeOne = () => {
+    setchecked(!checked);
+  };
 
   function handleDeleteTask() {
-    onDeleteTask(content);
-  }
-
-  function handleMarkTask() {
-    onMarkTask(content);
+    onDeleteTask(id);
   }
 
   return (
@@ -17,15 +19,15 @@ export function Task({ content, onDeleteTask, onMarkTask }) {
       <div className={styles.taskBox}>
         <div className={styles.taskContent}>
           <header>
-            <button onClick={handleMarkTask}>
-              <CheckCircle size={24} className={styles.checklCircle} />
-            </button>
+            <Checkbox
+              label={checked.toString()}
+              value={checked}
+              onChange={handleChangeOne}
+            />
 
-            <p>
-              {content}
-            </p>
+            <p>{content}</p>
 
-            <button onClick={handleDeleteTask} title="Deletar Comentário">
+            <button onClick={handleDeleteTask} title="Deletar Tarefa">
               <Trash size={24} />
             </button>
           </header>
