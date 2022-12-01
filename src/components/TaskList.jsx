@@ -11,8 +11,6 @@ export function TaskList() {
 
   const [newTaskText, setNewTaskText] = useState("");
 
-  const taskQuantity = tasks.length;
-
   function handleCreateNewTask() {
     event?.preventDefault();
 
@@ -37,7 +35,18 @@ export function TaskList() {
     setTasks(tasksWithoutDeletedOne);
   }
 
+  function EmptyList () {
+    const isEmptyList = taskQuantity;
+
+    if (isEmptyList === 0) {
+      return <VoidList />;
+    }
+    return <div></div>;
+  }
+
   const isNewTaskEmpty = newTaskText.length === 0;
+
+  const taskQuantity = tasks.length;
 
   return (
     <div>
@@ -67,12 +76,12 @@ export function TaskList() {
 
             <div>
               <strong className={styles.checkListTitle2}>Concluidas</strong>
-              <span>{}</span>
+              <span>{} de {taskQuantity}</span>
             </div>
           </header>
 
           <main>
-            <VoidList />
+            <EmptyList isEmptyList={taskQuantity} />
 
             {tasks.map((task) => {
               return (

@@ -6,13 +6,13 @@ import styles from "./Task.module.css";
 export function Task({ id, content, onDeleteTask }) {
   const [checked, setchecked] = useState(false);
 
-  const handleChangeOne = () => {
+  const handleChange = () => {
     setchecked(!checked);
   };
 
   function handleDeleteTask() {
     onDeleteTask(id);
-  }
+  };
 
   return (
     <div className={styles.task}>
@@ -22,7 +22,7 @@ export function Task({ id, content, onDeleteTask }) {
             <Checkbox
               label={checked.toString()}
               value={checked}
-              onChange={handleChangeOne}
+              onChange={handleChange}
             />
 
             <p>{content}</p>

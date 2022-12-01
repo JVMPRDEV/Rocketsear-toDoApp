@@ -38,12 +38,3 @@
 .taskContent header p {
   font-size: 0.875rem;
 }
-
-.checklCircle {
-  cursor: pointer;
-}
-
-.checklCircle:hover {
-  color: var(--blue-400);
-}
-
