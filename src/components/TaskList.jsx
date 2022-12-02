@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import { v4 as uuidv4 } from 'uuid'
 import { PlusCircle } from "phosphor-react";
 import styles from "./TaskList.module.css";
 
@@ -7,6 +7,19 @@ import { Task } from "./Task";
 import { VoidList } from "./VoidList";
 
 export function TaskList() {
+  // const [tasks, setTasks] = useState([
+  //   {
+  //     id: uuidv4(),
+  //     content:'Terminar o desafio',
+  //     isComplete: true
+  //   },
+  //   {
+  //     id: uuidv4(),
+  //     content:'Importar projeto no Git',
+  //     isComplete: true
+  //   },
+  // ])
+
   const [tasks, setTasks] = useState(["Lavar roupas"]);
 
   const [newTaskText, setNewTaskText] = useState("");
@@ -35,8 +48,8 @@ export function TaskList() {
     });
 
     setTasks(tasksWithoutDeletedOne);
-    
-    if (boxToChange === "false" && checkedBoxes > 0) {
+
+    if (checkedBoxes > 0) {
       setCheckedBox(checkedBoxes - 1);
     }
   }
