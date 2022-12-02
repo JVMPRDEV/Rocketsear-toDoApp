@@ -3,11 +3,15 @@ import { useState } from "react";
 import { Checkbox } from "./CheckBox";
 import styles from "./Task.module.css";
 
-export function Task({ id, content, onDeleteTask }) {
-  const [checked, setchecked] = useState(false);
+export function Task({ id, content, onDeleteTask, onChangeCheckBox }) {
+  const [checked, setChecked] = useState(false);
+
+  const currentBox = (!checked).toString();
+  const label = checked.toString();
 
   const handleChange = () => {
-    setchecked(!checked);
+    setChecked(!checked);
+    onChangeCheckBox(currentBox, id);
   };
 
   function handleDeleteTask() {
@@ -20,7 +24,7 @@ export function Task({ id, content, onDeleteTask }) {
         <div className={styles.taskContent}>
           <header>
             <Checkbox
-              label={checked.toString()}
+              label={label}
               value={checked}
               onChange={handleChange}
             />

@@ -11,6 +11,8 @@ export function TaskList() {
 
   const [newTaskText, setNewTaskText] = useState("");
 
+  const [checkedBoxes, setCheckedBox] = useState(0);
+
   function handleCreateNewTask() {
     event?.preventDefault();
 
@@ -33,15 +35,26 @@ export function TaskList() {
     });
 
     setTasks(tasksWithoutDeletedOne);
+    
+    if (boxToChange === "false" && checkedBoxes > 0) {
+      setCheckedBox(checkedBoxes - 1);
+    }
   }
 
-  function EmptyList () {
+  function EmptyList() {
     const isEmptyList = taskQuantity;
 
     if (isEmptyList === 0) {
       return <VoidList />;
     }
-    return <div></div>;
+  }
+
+  function changeCheckBox(boxToChange) {
+    if (boxToChange === "true") {
+      setCheckedBox(checkedBoxes + 1);
+    } else if (boxToChange === "false" && checkedBoxes > 0) {
+      setCheckedBox(checkedBoxes - 1);
+    }
   }
 
   const isNewTaskEmpty = newTaskText.length === 0;
@@ -76,7 +89,9 @@ export function TaskList() {
 
             <div>
               <strong className={styles.checkListTitle2}>Concluidas</strong>
-              <span>{} de {taskQuantity}</span>
+              <span>
+                {checkedBoxes} de {taskQuantity}
+              </span>
             </div>
           </header>
 
@@ -90,6 +105,7 @@ export function TaskList() {
                   id={task}
                   content={task}
                   onDeleteTask={deleteTask}
+                  onChangeCheckBox={changeCheckBox}
                 />
               );
             })}
